@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+<body ng-app="myApp">
+    <p><a href="#/!">Main</a></p>
+    
+    <a href="#!madrid">Madrid</a>
+    <a href="#!berlin">Berlin</a>
+
+    <p>Kliki linke</p>
+    <p>Igal vaatel on oma kontroller, mis annab välja sõnumi.</p>
+
+    <div ng-view></div>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+            .when("!/", {
+                templateUrl:"routingController.html"
+            })
+            .when("/madrid", {
+                templateUrl:"madrid.html",
+                controller: "madridCtrl"
+            })
+            .when("/berlin", {
+                templateUrl:"berlin.html",
+                controller: "berlinCtrl"
+            })
+        });
+        app.controller("madridCtrl", function($scope) {
+            $scope.msg = "Welcome to Madrid"
+        });
+        app.controller("berlinCtrl", function($scope) {
+            $scope.msg = "Welcome to Berlin"
+        });
+    </script>
+</body>
+</html>
